@@ -6,7 +6,7 @@ function calcStuff(str,operation)
     let pos=str.indexOf(operation)
     let i=pos-1;
     let Pos=pos;
-    while(i>=0&&Number.isInteger(parseInt(str[i])))
+    while(i>=0&&(Number.isInteger(parseInt(str[i])))||str[i]==`.`)
     {
         num=str[i]+num;
         i--;
@@ -22,15 +22,15 @@ function calcStuff(str,operation)
         }
     }
     num="";
-    while(Number.isInteger(parseInt(str[i]))&&i<str.length)
+    while((Number.isInteger(parseInt(str[i]))||str[i]=='.')&&i<str.length)
     {
         num=num+str[i];
         i++;
     }
     num2=num;
     let exp=`${num1}${operation}${num2}`;
-    num1=parseInt(num1);
-    num2=parseInt(num2);
+    num1=parseFloat(num1);
+    num2=parseFloat(num2);
     let loc=str.indexOf(exp);
     let locationEnd=loc+exp.length;
     if (operation=='+')
