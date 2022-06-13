@@ -80,6 +80,12 @@ body.addEventListener('click', (event) => {
                     data.innerText = pressedButton;
                     state = "op";
                 }
+                else if (pressedButton == '.') {
+                    let val = data.innerText;
+                    if (!val.includes('.')) {
+                        data.innerText += '.';
+                    }
+                }
                 break;
             case 'op':
                 {
@@ -94,21 +100,21 @@ body.addEventListener('click', (event) => {
                     else if (pressedButton == 'Clear') {
                         data.innerText = '0';
                         equation.innerText = '0';
-                        state='no1';
+                        state = 'no1';
                     }
                     else if (pressedButton == '←') {
                         //to be implemented
                         data.innerText = equation.innerText.slice(0, -1);
-                        equation.innerText=equation.innerText.slice(0,-1);
-                        state='no1';
+                        equation.innerText = equation.innerText.slice(0, -1);
+                        state = 'no1';
                     }
-                    
+
                 }
                 break;
             case 'no2':
                 {
                     if (pattern.test(pressedButton)) {
-                        if (data.innerText=='0') {
+                        if (data.innerText == '0') {
                             data.innerText = pressedButton;
                         }
                         else {
@@ -121,26 +127,31 @@ body.addEventListener('click', (event) => {
                     else if (pressedButton == 'Clear') {
                         data.innerText = '0';
                         equation.innerText = '0';
-                        state='no1';
+                        state = 'no1';
                     }
-                    else if(pressedButton=='=')
-                    {
-                        equation.innerText+=data.innerText;
-                        let eq=equation.innerText;
-                        console.log("Before",eq);
-                        eq=eq.replace('x','*');
-                        
-                        eq=eq.replace('÷','/');
-                        console.log("After:",eq);
-                        data.innerText=String(eval(eq));
-                        state='no1';
-                    }
-                    else if(operators.test(pressedButton))
-                    {
+                    else if (pressedButton == '=') {
+                        equation.innerText += data.innerText;
+                        let eq = equation.innerText;
+                        console.log("Before", eq);
+                        eq = eq.replaceAll('x', '*');
 
-                        equation.innerText = equation.innerText+data.innerText+ pressedButton;
+                        eq = eq.replaceAll('÷', '/');
+                        console.log("After:", eq);
+                        data.innerText = String(eval(eq).toFixed(2));
+
+                        state = 'no1';
+                    }
+                    else if (operators.test(pressedButton)) {
+
+                        equation.innerText = equation.innerText + data.innerText + pressedButton;
                         data.innerText = pressedButton;
-                        state='op';
+                        state = 'op';
+                    }
+                    else if (pressedButton == '.') {
+                        let val = data.innerText;
+                        if (!val.includes('.')) {
+                            data.innerText += '.';
+                        }
                     }
                 }
         }
