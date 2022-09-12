@@ -134,11 +134,14 @@ body.addEventListener('click', (event) => {
                         let eq = equation.innerText;
                         console.log("Before", eq);
                         eq = eq.replaceAll('x', '*');
-
+                        
                         eq = eq.replaceAll('÷', '/');
+                        let t=eq.split('/')[1]
+                        if t!='0':
+                            data.innerText = String(eval(eq).toFixed(2));
                         console.log("After:", eq);
-                        data.innerText = String(eval(eq).toFixed(2));
-
+                        
+                        
                         state = 'no1';
                     }
                     else if (operators.test(pressedButton)) {
